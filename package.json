@@ -1,0 +1,23 @@
+{
+  "name": "shopwp-micros",
+  "version": "2.0.0",
+  "description": "eCommerce application built with the MERN stack",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/borakgul/ShopWP-MicroS.git"
+  },
+  "author": "Bora Akgul",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/borakgul/ShopWP-MicroS/issues"
+  },
+  "homepage": "https://github.com/borakgul/ShopWP-MicroS#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
