@@ -1,6 +1,5 @@
 import { Navbar, Nav, Container } from 'react-bootstrap';
  import { FaUser, FaBeer } from 'react-icons/fa';
- import  Logo  from '../assets/logo.png';
  import {LinkContainer} from 'react-router-bootstrap';
  
  const Header = () => {
