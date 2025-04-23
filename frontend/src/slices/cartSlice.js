@@ -55,6 +55,11 @@ const savedCart = localStorage.getItem('cart')
           },
     },
 });
-export const { addToCart, removeFromCart, saveShippingAddress, savePaymentMethod, clearCartItems } = cartSlice.actions;
+export const { addToCart,
+     removeFromCart,
+      saveShippingAddress,
+       savePaymentMethod,
+        clearCartItems 
+    } = cartSlice.actions;
 
 export default cartSlice.reducer;
