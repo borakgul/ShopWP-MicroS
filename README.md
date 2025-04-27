@@ -1,4 +1,5 @@
 > eCommerce platform built with the MERN stack & Redux.
+ Microservices Deployment with Docker & Kubernetes
 <img src="./frontend/public/images/screens.png">
 
 - [Features](#features)
@@ -9,6 +10,7 @@
 - [Build & Deploy](#build--deploy)
   - [Seed Database](#seed-database)
 - [Outcomes & Screenshots](#outcomes--screenshots)
+- [Deployment & Orchestration](#deployment--orchestration)
 ## Features
 
 - Full featured shopping cart
@@ -23,6 +25,7 @@
 - Mark orders as delivered option
 - Checkout process (shipping, payment method, etc)
 - Database seeder (products & users)
+- Kubernetes (Orchestration via Minikube)
 
 - ## Usage
 - Create a MongoDB database and obtain your `MongoDB URI` - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register)
@@ -90,7 +93,63 @@ john@email.com (Customer)
 jane@email.com (Customer)
 123456
 ```
+## Deployment & Orchestration
+---
+Before starting the deployment, make sure you have the following tools installed on your machine :
+- Node.js (v18 or higher)
+- Docker Desktop
+- kubectl (Kubernetes CLI)
+- Chocolatey (for Windows package management and also install minikube)
+  ```bash choco install minikube
 
+  Set-ExecutionPolicy Bypass -Scope Process -Force; `
+  [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; `
+  iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+- Minikube (for local Kubernetes cluster)
+  ```bash
+  choco install minikube
+
+## ⚙️ Deployment Steps
+
+1. Docker Build
+2. Docker Push
+3. kubectl apply
+4. Port forwarding
+
+### 1-2. Docker Image Creation
+
+- Backend Docker image:
+
+  ```bash
+  docker build -t borakgul/backend ./
+  docker push borakgul/backend
+- Frontend Docker image:
+   ```bash
+  docker build -t borakgul/frontend ./
+  docker push borakgul/frontend
+  
+### 3. kubectl apply
+ For create that files and configs
+- frontend-service (NodePort 3000:31000)
+- backend-service (NodePort 5000:31001)
+- mongo-service (ClusterIP)
+- Deployments created:
+  I.frontend-deployment
+  II.backend-deployment
+  
+  ```bash
+  kubectl apply -f k8s/
+
+### 4. Port forwarding
+-PORT Forward 
+- run in terminal and dont close 
+    ```bash
+    kubectl port-forward service/frontend-service 3000:3000
+    kubectl port-forward service/backend-service 5000:5000
+Application accessible at:
+
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:5000/api/products
 ---
 ## Outcomes & Screenshots
 This project was developed to simulate a real-world eCommerce flow with both user and admin roles. Key user journeys include user authentication, address collection, order creation, and order tracking—all managed through role-based access control.  
